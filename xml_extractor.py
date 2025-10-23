@@ -3,7 +3,9 @@ import json
 import re
 import os
 import time
+import webbrowser
 import xml.etree.ElementTree as ET
+
 from pathlib import Path
 from colorama import Fore, Style, init
 
@@ -207,7 +209,8 @@ def main():
             print(f"\n  {Fore.CYAN}Goodbye!{Style.RESET_ALL}")
             break
         elif choice == '2':
-            print(f"  {Fore.CYAN}GitHub: https://github.com/z3nTr4ry{Style.RESET_ALL}")
+            print(f"  {Fore.CYAN}Opening GitHub profile...{Style.RESET_ALL}")
+            webbrowser.open("https://github.com/Zentrary")
             continue
         elif choice == '1':
             url = input(f"\n  [>] Enter data.js URL: ").strip()
@@ -245,4 +248,5 @@ def main():
             print(f"{Fore.RED}  Invalid choice, please select 1–3{Style.RESET_ALL}")
 
 if __name__ == "__main__":
+
     main()
