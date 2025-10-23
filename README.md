@@ -31,8 +31,6 @@
 - 🔍 **ระบบค้นหาขั้นสูง** - หาคำตอบได้หลายวิธี
 - 📊 **สรุปผลลัพธ์** - แสดงสถิติการประมวลผล
 
-![How to get URL](How%20to%20get%20url.png)
-
 ### 🚀 การติดตั้ง
 ```bash
 git clone https://github.com/z3nTr4ry/cambridge-xml-extractor.git
@@ -56,16 +54,11 @@ python xml_extractor.py
 3. รอการประมวลผล
 4. ดูผลลัพธ์ที่ได้
 
-### 📸 วิธีการหา URL ของไฟล์ data.js
+#### 📸 วิธีการหา URL ของไฟล์ data.js
 
 ![How to get URL](How%20to%20get%20url.png)
 
-**ขั้นตอนการหา URL:**
-1. เปิดเว็บไซต์ Cambridge
-2. เปิด Developer Tools (F12)
-3. ไปที่แท็บ Network
-4. ค้นหาไฟล์ `data.js`
-5. คัดลอก URL ที่ได้
+*ภาพแสดงวิธีการหา URL ของไฟล์ data.js จาก Cambridge*
 
 ### 📝 ตัวอย่างการใช้งาน
 ```
@@ -103,8 +96,6 @@ This tool extracts questions and answers from Cambridge `data.js` files. It can:
 - 🔍 **Advanced Search** - Multiple methods to find answers
 - 📊 **Result Summary** - Processing statistics display
 
-![How to get URL](How%20to%20get%20url.png)
-
 ### 🚀 Installation
 ```bash
 git clone https://github.com/z3nTr4ry/cambridge-xml-extractor.git
@@ -128,16 +119,11 @@ python xml_extractor.py
 3. Wait for processing
 4. View results
 
-### 📸 How to Get data.js URL
+#### 📸 How to Get data.js URL
 
 ![How to get URL](How%20to%20get%20url.png)
 
-**Steps to find the URL:**
-1. Open Cambridge website
-2. Open Developer Tools (F12)
-3. Go to Network tab
-4. Search for `data.js` file
-5. Copy the URL
+*Image showing how to find data.js URL from Cambridge*
 
 ### 📝 Example Usage
 ```
@@ -165,12 +151,6 @@ Summary: 6 processed, 2 skipped
 - **Multiple Question Files** - Multiple questions in one XML file
 - **Gap Text Questions** - Fill-in-the-blank questions
 - **Choice Questions** - Multiple choice questions
-
-### 📊 Visual Guide
-
-![How to get URL](How%20to%20get%20url.png)
-
-*Screenshot showing how to find the data.js URL from Cambridge website*
 
 ### 🎯 Extraction Methods
 1. **Content Block Search** - Find questions in content blocks
