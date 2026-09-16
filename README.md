@@ -1,204 +1,69 @@
-# 🎯 Cambridge XML Extractor
+# Cambridge One Answer Extractor
 
-<div align="center">
+เครื่องมือแบบ command-line สำหรับดาวน์โหลดและแยกข้อมูลกิจกรรมจากไฟล์ `data.js` ของ Cambridge One โดยอ่านข้อมูล `ajaxData` แล้วแสดงคำตอบที่พบในไฟล์ XML เช่น Multiple Choice, Dropdown, Text Entry และ Drag & Drop
 
-![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Status](https://img.shields.io/badge/Status-Active-brightgreen.svg)
+## ความสามารถ
 
-**เครื่องมือสกัดคำถามและคำตอบจากไฟล์ Cambridge data.js**
+- ดาวน์โหลดและตรวจสอบไฟล์ `data.js`
+- แยกไฟล์ XML ที่อยู่ใน `ajaxData`
+- อ่านคำตอบจากรูปแบบกิจกรรมที่รองรับ
+- แสดงผลคำถาม ตัวเลือก และคำตอบที่ถูกต้อง
+- บันทึกผลลัพธ์ไว้ในฐานข้อมูลภายในเครื่อง เพื่อเปิดดูซ้ำได้โดยไม่ต้องดาวน์โหลดใหม่
+- บันทึก log ของแต่ละ session ไว้ในโฟลเดอร์ `logs/`
 
-*A tool for extracting questions and answers from Cambridge data.js files*
+## สิ่งที่ต้องมี
 
-</div>
+- Python 3.9 ขึ้นไป
+- URL ของไฟล์ `data.js` ที่เข้าถึงได้จากเบราว์เซอร์
 
----
+ติดตั้งไลบรารีที่จำเป็นด้วยคำสั่ง:
 
-## 🇹🇭 ภาษาไทย
-
-### 📖 คำอธิบาย
-โปรแกรมนี้เป็นเครื่องมือสำหรับสกัดคำถามและคำตอบจากไฟล์ `data.js` ของ Cambridge โดยสามารถ:
-- ดาวน์โหลดและถอดรหัสไฟล์ data.js
-- สกัดไฟล์ XML ที่ฝังอยู่ในไฟล์
-- หาคำถามและคำตอบจากไฟล์ XML
-- รองรับไฟล์ที่มีคำถามหลายข้อในไฟล์เดียว
-- แสดงผลลัพธ์อย่างสวยงาม
-
-### ✨ ฟีเจอร์
-- 🔄 **รองรับไฟล์หลายประเภท** - ทั้งคำถามเดี่ยวและคำถามหลายข้อ
-- 🎨 **UI สวยงาม** - แสดงผลด้วย ASCII Art และสีสัน
-- 📁 **จัดการไฟล์อัตโนมัติ** - สร้างและลบไฟล์ XML อัตโนมัติ
-- 🔍 **ระบบค้นหาขั้นสูง** - หาคำตอบได้หลายวิธี
-- 📊 **สรุปผลลัพธ์** - แสดงสถิติการประมวลผล
-
-### 🚀 การติดตั้ง
 ```bash
-git clone https://github.com/z3nTr4ry/cambridge-xml-extractor.git
-cd cambridge-xml-extractor
-pip install -r requirements.txt
+pip install requests colorama
 ```
 
-### 📋 ความต้องการ
-- Python 3.7+
-- requests
-- colorama
-- pathlib
+## วิธีเริ่มใช้งาน
 
-### 🎮 วิธีการใช้งาน
+เปิด Command Prompt หรือ PowerShell ในโฟลเดอร์โปรเจกต์ แล้วรัน:
+
 ```bash
-python xml_extractor.py
+python extractor.py
 ```
 
-1. เลือกตัวเลือก "1. Continue"
-2. ใส่ URL ของไฟล์ data.js
-3. รอการประมวลผล
-4. ดูผลลัพธ์ที่ได้
+เมื่อโปรแกรมแสดงเมนู ให้เลือก:
 
-#### 📸 วิธีการหา URL ของไฟล์ data.js
+| ตัวเลือก | การทำงาน |
+| --- | --- |
+| `1` | ใส่ URL ของไฟล์ `data.js` เพื่อดึงและแสดงคำตอบ |
+| `2` | เปิดหน้า GitHub ของผู้พัฒนา |
+| `3` | เปิดดูข้อมูลที่บันทึกไว้ในฐานข้อมูล |
+| `4` | ออกจากโปรแกรม |
+
+หาก URL เดิมมีข้อมูลอยู่ในฐานข้อมูลแล้ว โปรแกรมจะนำผลลัพธ์เดิมมาแสดงโดยไม่ดาวน์โหลดซ้ำ
+
+#### วิธีการหา URL ของไฟล์ data.js
 
 ![How to get URL](How%20to%20get%20url.png)
 
-*ภาพแสดงวิธีการหา URL ของไฟล์ data.js จาก Cambridge*
+1. เปิดกิจกรรมที่ต้องการใน Cambridge One และเข้าสู่หน้ากิจกรรมให้เรียบร้อย
+2. เปิด Developer Tools ของเบราว์เซอร์ โดยกด `F12` หรือ `Ctrl + Shift + I`
+3. ไปที่แท็บ `Network` แล้วรีโหลดหน้าเว็บ
+4. ค้นหาคำว่า `data.js` ในช่องกรองคำขอ
+5. คลิกคำขอที่พบ แล้วคัดลอก URL จากส่วน `Request URL`
+6. นำ URL ไปวางเมื่อโปรแกรมถาม `Enter data.js URL`
 
-### 📝 ตัวอย่างการใช้งาน
-```
-Cambridge XML Extractor
-==================================================
+## ไฟล์และโฟลเดอร์ที่สร้างขึ้น
 
-Enter data.js URL: https://content.cambridgeone.org/.../data.js
+| รายการ | รายละเอียด |
+| --- | --- |
+| `answers_db.json` | ฐานข้อมูลผลลัพธ์ที่บันทึกไว้ |
+| `decoded_xml/` | ไฟล์ XML ชั่วคราวที่แยกจาก `data.js` |
+| `logs/` | log ของการทำงานแต่ละ session |
 
-Processing 8 files...
+โฟลเดอร์ `decoded_xml/` จะถูกลบไฟล์ XML หลังจบขั้นตอนการประมวลผลแต่ละรายการ ส่วนผลลัพธ์ที่บันทึกใน `answers_db.json` จะยังคงอยู่เพื่อเปิดดูภายหลัง
 
-cat3105020.xml
-Question: Rafael practices the guitar every day. His ______ amazes me.
-Options: bravery, wisdom, dedication
-Correct: dedication
+## หมายเหตุ
 
-Summary: 6 processed, 2 skipped
-```
-
----
-
-## 🇺🇸 English
-
-### 📖 Description
-This tool extracts questions and answers from Cambridge `data.js` files. It can:
-- Download and decode data.js files
-- Extract embedded XML files
-- Find questions and answers from XML files
-- Support files with multiple questions
-- Display results beautifully
-
-### ✨ Features
-- 🔄 **Multiple File Types** - Single and multiple questions support
-- 🎨 **Beautiful UI** - ASCII Art and colored output
-- 📁 **Auto File Management** - Automatic XML file creation and cleanup
-- 🔍 **Advanced Search** - Multiple methods to find answers
-- 📊 **Result Summary** - Processing statistics display
-
-### 🚀 Installation
-```bash
-git clone https://github.com/z3nTr4ry/cambridge-xml-extractor.git
-cd cambridge-xml-extractor
-pip install -r requirements.txt
-```
-
-### 📋 Requirements
-- Python 3.7+
-- requests
-- colorama
-- pathlib
-
-### 🎮 Usage
-```bash
-python xml_extractor.py
-```
-
-1. Select "1. Continue"
-2. Enter data.js file URL
-3. Wait for processing
-4. View results
-
-#### 📸 How to Get data.js URL
-
-![How to get URL](How%20to%20get%20url.png)
-
-*Image showing how to find data.js URL from Cambridge*
-
-### 📝 Example Usage
-```
-Cambridge XML Extractor
-==================================================
-
-Enter data.js URL: https://content.cambridgeone.org/.../data.js
-
-Processing 8 files...
-
-cat3105020.xml
-Question: Rafael practices the guitar every day. His ______ amazes me.
-Options: bravery, wisdom, dedication
-Correct: dedication
-
-Summary: 6 processed, 2 skipped
-```
-
----
-
-## 🛠️ Technical Details
-
-### 🔧 Supported File Types
-- **Single Question Files** - One question per XML file
-- **Multiple Question Files** - Multiple questions in one XML file
-- **Gap Text Questions** - Fill-in-the-blank questions
-- **Choice Questions** - Multiple choice questions
-
-### 🎯 Extraction Methods
-1. **Content Block Search** - Find questions in content blocks
-2. **Simple Choice** - Extract from choice elements
-3. **Gap Text** - Extract from gap text elements
-4. **Feedback Text** - Find answers from feedback
-5. **Response Declaration** - Extract from response declarations
-6. **Choice Interaction** - Handle multiple question files
-
-### 📁 File Structure
-```
-cambridge-xml-extractor/
-├── xml_extractor.py      # Main program
-├── requirements.txt      # Dependencies
-├── README.md            # This file
-└── decoded_xml/         # Output directory (auto-created)
-```
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please feel free to submit a Pull Request.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 👨‍💻 Author
-
-**z3nTr4ry**
-
-- GitHub: [@z3nTr4ry](https://github.com/z3nTr4ry)
-
----
-
-## ⭐ Support
-
-If you find this project helpful, please give it a star! ⭐
-
----
-
-<div align="center">
-
-**Made with ❤️ by z3nTr4ry**
-
-</div>
+- ต้องมีสิทธิ์เข้าถึงกิจกรรมและ URL ที่นำมาใช้งาน
+- หากดาวน์โหลดไม่สำเร็จ ให้ตรวจสอบว่า URL ยังใช้งานได้และ session ของเว็บไซต์ยังไม่หมดอายุ
+- โปรแกรมจะข้ามกิจกรรมที่ตรวจพบข้อความ `You have finished the activity.` หรือไม่พบข้อมูลคำตอบ
