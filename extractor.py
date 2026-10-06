@@ -53,7 +53,8 @@ class SkibidiLogger:
                 f"[!] cannot open log file: {self.log_file}\n"
             )
 
-    def skibidy(self, message):
+    def write(self, message):
+        """Required for sys.stdout/sys.stderr replacement."""
         try:
             self.original_stdout.write(message)
         except Exception:
@@ -66,7 +67,8 @@ class SkibidiLogger:
             except Exception:
                 pass
 
-    def gyattflush(self):
+    def flush(self):
+        """Required for sys.stdout/sys.stderr replacement."""
         try:
             self.original_stdout.flush()
         except Exception:
@@ -76,6 +78,16 @@ class SkibidiLogger:
                 self.file.flush()
             except Exception:
                 pass
+
+    def isatty(self):
+        """Required for sys.stdout/sys.stderr replacement."""
+        return False
+
+    def skibidy(self, message):
+        self.write(message)
+
+    def gyattflush(self):
+        self.flush()
 
     def ohio_close(self):
         if self.file:
@@ -136,7 +148,6 @@ class PomlikeheeyaDB:
 
     def count(self):
         return len(self.data)
-
 
 def pomlikeheeyaimak(url):
     print(f"{Fore.CYAN}  [*] downloading: {url[:80]}...{Style.RESET_ALL}")
